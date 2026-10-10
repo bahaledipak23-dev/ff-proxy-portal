@@ -202,9 +202,9 @@
     <div class="step-title">— STEP 01 — WATCH</div>
     
     <div class="video-container">
-        <!-- Download option disable aur sound ke sath play karne ke liye -->
+        <!-- Video ka exact file name yaha set hai -->
         <video controls controlslist="nodownload" playsinline>
-            <source src="your-video-file.mp4" type="video/mp4">
+            <source src="video.mp4" type="video/mp4">
             Aapka browser video tag support nahi karta.
         </video>
     </div>
@@ -266,12 +266,11 @@
     </div>
 
     <script>
-        // Live Counters up-down karne ka script
         let topLive = 1311;
         let watching = 1454;
 
         setInterval(() => {
-            let randomChange = Math.floor(Math.random() * 7) - 3; // -3 se +3 tak badlav
+            let randomChange = Math.floor(Math.random() * 7) - 3;
             topLive += randomChange;
             if(topLive < 1290) topLive = 1300;
             document.getElementById('topLiveCounter').innerText = `🟢 ${topLive.toLocaleString()} LIVE`;
@@ -282,7 +281,6 @@
             document.getElementById('watchingCounter').innerText = `${watching.toLocaleString()} watching`;
         }, 3000);
 
-        // Naye comments automatic aane ka script
         const fakeUsers = [
             {name: "Karan_99", text: "Working trick bro! 🔥", color: "#ef4444"},
             {name: "Sneha_Roy", text: "Maine bhi install kar liya, mast chal raha hai.", color: "#06b6d4"},
@@ -305,7 +303,7 @@
                 </div>
             `;
             list.prepend(newItem);
-        }, 6000); // Har 6 second me naya comment aayega
+        }, 6000);
     </script>
 </body>
 </html>
