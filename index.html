@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FF Proxy Portal</title>
+    <!-- Google Font for stylish typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #070913;
+            color: #ffffff;
+            padding: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .dot {
+            width: 7px;
+            height: 7px;
+            background-color: #ff4d6d;
+            border-radius: 50%;
+        }
+        .dot:nth-child(2) { background-color: #ffb703; }
+        .dot:nth-child(3) { background-color: #06d6a0; }
+        .dot:nth-child(4) { background-color: #118ab2; }
+        
+        .logo-text {
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 1.5px;
+            color: #e2e8f0;
+            margin-left: 4px;
+        }
+        .live-badge {
+            background: rgba(0, 242, 254, 0.08);
+            color: #00f2fe;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            border: 1px solid rgba(0, 242, 254, 0.25);
+            letter-spacing: 0.5px;
+        }
+        .step-title {
+            color: #64748b;
+            font-size: 11px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .video-container video {
+            width: 100%;
+            display: block;
+        }
+        .watch-section {
+            text-align: center;
+            margin-bottom: 22px;
+        }
+        .watch-section h2 {
+            font-size: 19px;
+            font-weight: 800;
+            color: #f43f5e;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+        .watch-section p {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 18px;
+            line-height: 1.5;
+        }
+        
+        .install-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 50%, #6366f1 100%);
+            color: #ffffff;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 14px;
+            font-size: 16px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            animation: pulseGlow 2s infinite;
+            transition: transform 0.2s ease;
+        }
+        .install-btn:active {
+            transform: scale(0.97);
+        }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(56, 189, 248, 0.8); }
+            100% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+        }
+
+        .comments-box {
+            background: #0f172a;
+            border-radius: 14px;
+            padding: 14px;
+            border: 1px solid #1e293b;
+        }
+        .comments-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #94a3b8;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 8px;
+            font-weight: 600;
+        }
+        .comment-list {
+            max-height: 200px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .comment-item {
+            display: flex;
+            align-items: flex-start;
+            font-size: 12px;
+        }
+        .avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+            margin-right: 10px;
+            flex-shrink: 0;
+            color: #fff;
+        }
+        .comment-content .username {
+            font-weight: 700;
+            font-size: 12px;
+            color: #f1f5f9;
+        }
+        .comment-content .time {
+            font-size: 10px;
+            color: #64748b;
+            margin-left: 6px;
+        }
+        .comment-content .text {
+            color: #cbd5e1;
+            margin-top: 2px;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo-container">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="logo-text">FF PROXY PORTAL</div>
+        </div>
+        <div class="live-badge" id="topLiveCounter">🟢 1,311 LIVE</div>
+    </div>
+
+    <div class="step-title">— STEP 01 — WATCH</div>
+    
+    <div class="video-container">
+        <!-- Download option disable aur sound ke sath play karne ke liye -->
+        <video controls controlslist="nodownload" playsinline>
+            <source src="your-video-file.mp4" type="video/mp4">
+            Aapka browser video tag support nahi karta.
+        </video>
+    </div>
+
+    <div class="watch-section">
+        <h2>WATCH FULL VIDEO</h2>
+        <p>Complete the video to unlock proxy server access<br>5,685 installs in last hour</p>
+        
+        <!-- Aapka TimeBucks Referral Link -->
+        <a href="https://timebucks.com/?refID=230274904" class="install-btn">
+            <span>↓ Install Now</span>
+        </a>
+    </div>
+
+    <div class="step-title">— STEP 02 — INSTALL</div>
+
+    <div class="comments-box">
+        <div class="comments-header">
+            <span>Live Comments</span>
+            <span id="watchingCounter">1,454 watching</span>
+        </div>
+        <div class="comment-list" id="commentList">
+            <div class="comment-item">
+                <div class="avatar" style="background: linear-gradient(135deg, #10b981, #059669);">A</div>
+                <div class="comment-content">
+                    <span class="username">Ajay2002</span><span class="time">1s ago</span>
+                    <div class="text">2 min me working hai >> fastlegend 🔥</div>
+                </div>
+            </div>
+            <div class="comment-item">
+                <div class="avatar" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">M</div>
+                <div class="comment-content">
+                    <span class="username">Manish1991</span><span class="time">just now</span>
+                    <div class="text">arey ~ free me ff proxy mil gaya</div>
+                </div>
+            </div>
+            <div class="comment-item">
+                <div class="avatar" style="background: linear-gradient(135deg, #f59e0b, #d97706);">R</div>
+                <div class="comment-content">
+                    <span class="username">Rahul_FF</span><span class="time">2m ago</span>
+                    <div class="text">Bhai yeh 100% real hai, try karo sab log!</div>
+                </div>
+            </div>
+            <div class="comment-item">
+                <div class="avatar" style="background: linear-gradient(135deg, #ec4899, #db2777);">P</div>
+                <div class="comment-content">
+                    <span class="username">Priya_Gamer</span><span class="time">3m ago</span>
+                    <div class="text">Mera proxy connect ho gaya thank you admin 😍</div>
+                </div>
+            </div>
+            <div class="comment-item">
+                <div class="avatar" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8);">V</div>
+                <div class="comment-content">
+                    <span class="username">Vikash99</span><span class="time">4m ago</span>
+                    <div class="text">Sahi trick hai yaar, maza aa gaya.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Live Counters up-down karne ka script
+        let topLive = 1311;
+        let watching = 1454;
+
+        setInterval(() => {
+            let randomChange = Math.floor(Math.random() * 7) - 3; // -3 se +3 tak badlav
+            topLive += randomChange;
+            if(topLive < 1290) topLive = 1300;
+            document.getElementById('topLiveCounter').innerText = `🟢 ${topLive.toLocaleString()} LIVE`;
+
+            let randomChange2 = Math.floor(Math.random() * 9) - 4;
+            watching += randomChange2;
+            if(watching < 1430) watching = 1445;
+            document.getElementById('watchingCounter').innerText = `${watching.toLocaleString()} watching`;
+        }, 3000);
+
+        // Naye comments automatic aane ka script
+        const fakeUsers = [
+            {name: "Karan_99", text: "Working trick bro! 🔥", color: "#ef4444"},
+            {name: "Sneha_Roy", text: "Maine bhi install kar liya, mast chal raha hai.", color: "#06b6d4"},
+            {name: "Amit_Pro", text: "Bhai link badiya hai, thanks!", color: "#84cc16"},
+            {name: "Deepak_FF", text: "Ek number trick hai guys!", color: "#eab308"}
+        ];
+
+        setInterval(() => {
+            let randomIndex = Math.floor(Math.random() * fakeUsers.length);
+            let user = fakeUsers[randomIndex];
+            let list = document.getElementById('commentList');
+            
+            let newItem = document.createElement('div');
+            newItem.className = 'comment-item';
+            newItem.innerHTML = `
+                <div class="avatar" style="background: ${user.color};">${user.name[0]}</div>
+                <div class="comment-content">
+                    <span class="username">${user.name}</span><span class="time">just now</span>
+                    <div class="text">${user.text}</div>
+                </div>
+            `;
+            list.prepend(newItem);
+        }, 6000); // Har 6 second me naya comment aayega
+    </script>
+</body>
+</html>
